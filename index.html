@@ -269,44 +269,34 @@
       </div>
     </main>
 
-    <script>
-      // keep footer year fresh
-      document.getElementById("year").textContent = new Date().getFullYear();
+ <script>
+  const form = document.getElementById("waitlistForm");
+  const statusEl = document.getElementById("status");
 
-      // --- ORIGINAL WAITLIST LOGIC (unchanged, just moved into new design) ---
-      const WEB_APP_URL =
-        "https://script.google.com/macros/s/AKfycbyLoLLmj-q_ytVXasrLKvdjP7PPbzcY4YY09Rdq-OxfxhgucW81BPzDAbOoGrDGKBJg/exec";
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    statusEl.textContent = "Submitting…";
 
-      const form = document.getElementById("waitlistForm");
-      const statusEl = document.getElementById("status");
+    const email = document.getElementById("email").value.trim();
 
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        statusEl.textContent = "Submitting…";
-
-        const email = document.getElementById("email").value.trim();
-
-        try {
-          const res = await fetch(WEB_APP_URL, {
-            method: "POST",
-            headers: { "Content-Type": "text/plain;charset=utf-8" },
-            body: JSON.stringify({
-              email,
-              source: "WAITLIST",
-            }),
-          });
-
-          const data = await res.json();
-          if (data.status === "ok") {
-            statusEl.textContent = "✅ You’re on the waitlist.";
-            form.reset();
-          } else {
-            statusEl.textContent = "⚠️ Something went wrong. Try again.";
-          }
-        } catch (err) {
-          statusEl.textContent = "⚠️ Network error. Try again.";
-        }
+    try {
+      const res = await fetch("/.netlify/functions/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
       });
-    </script>
+
+      const data = await res.json();
+      if (data.status === "ok") {
+        statusEl.textContent = "✅ You’re on the waitlist.";
+        form.reset();
+      } else {
+        statusEl.textContent = "⚠️ " + (data.message || "Something went wrong.");
+      }
+    } catch (err) {
+      statusEl.textContent = "⚠️ Network error. Try again.";
+    }
+  });
+</script>
   </body>
 </html>
