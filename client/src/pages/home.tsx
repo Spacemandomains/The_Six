@@ -292,6 +292,67 @@ export default function Home() {
           </motion.div>
         </div>
 
+        {/* Video Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="max-w-6xl mx-auto mt-24"
+        >
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-foreground" data-testid="text-videos-title">
+              See It In Action
+            </h2>
+            <p className="mt-2 text-muted-foreground">
+              Learn more about what The Six can do for your business.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6" data-testid="grid-videos">
+            <Card className="overflow-visible p-0" data-testid="card-video-1">
+              <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+                <iframe
+                  className="absolute inset-0 w-full h-full rounded-md"
+                  src="https://www.youtube.com/embed/8dVa9vH4BbM?si=IIUrPcdBW_sOxprs"
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+            </Card>
+
+            <Card className="overflow-visible p-0" data-testid="card-video-2">
+              <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+                <iframe
+                  className="absolute inset-0 w-full h-full rounded-md"
+                  src="https://www.youtube.com/embed/8adviQrRa1w?si=VfAwsztFjemAkIbX"
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+            </Card>
+
+            <Card className="overflow-visible p-0" data-testid="card-video-3">
+              <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+                <iframe
+                  className="absolute inset-0 w-full h-full rounded-md"
+                  src="https://www.youtube.com/embed/qWO7eXUQ4Rc?si=hOge5HTKpyXhA77T"
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+            </Card>
+          </div>
+        </motion.div>
+
         {/* Footer */}
         <div className="mt-24 border-t border-border pt-12">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 flex-wrap">
